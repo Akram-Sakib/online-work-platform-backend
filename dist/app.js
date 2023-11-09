@@ -11,8 +11,10 @@ const routes_1 = __importDefault(require("./app/routes"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const config_1 = __importDefault(require("./config"));
 const app = (0, express_1.default)();
+// Define the allowed origins
+const allowedOrigins = [config_1.default.frontend_url, 'http://localhost:3000'];
 const corsOptions = {
-    origin: config_1.default.frontend_url,
+    origin: allowedOrigins,
     credentials: true, //access-control-allow-credentials:true
 };
 app.use((0, cors_1.default)(corsOptions));
