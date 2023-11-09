@@ -98,9 +98,11 @@ const createAdmin = (admin, user, req) => __awaiter(void 0, void 0, void 0, func
     }
     // upload file to cloudinary
     const file = req.file;
-    const uploadedImage = yield FileUploadHelpers_1.FileUploadHelper.uploadToCloudinary(file);
-    if (uploadedImage) {
-        req.body.admin.avatarUrl = uploadedImage.secure_url;
+    if (file) {
+        const uploadedImage = yield FileUploadHelpers_1.FileUploadHelper.uploadToCloudinary(file);
+        if (uploadedImage) {
+            req.body.admin.avatarUrl = uploadedImage.secure_url;
+        }
     }
     // set role
     user.role = 'admin';
@@ -129,9 +131,18 @@ const getUsers = () => __awaiter(void 0, void 0, void 0, function* () {
     });
     return result;
 });
+const deleteUser = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield prisma_1.default.user.delete({
+        where: {
+            id,
+        },
+    });
+    return result;
+});
 exports.UserService = {
     createSeller,
     createBuyer,
     createAdmin,
     getUsers,
+    deleteUser,
 };

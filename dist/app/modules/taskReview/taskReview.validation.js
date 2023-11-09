@@ -7,7 +7,7 @@ const create = zod_1.z.object({
         comment: zod_1.z.string({
             required_error: 'Comment is required',
         }),
-        rating: zod_1.z.string({
+        rating: zod_1.z.number({
             required_error: 'Rating is required',
         }),
     }),

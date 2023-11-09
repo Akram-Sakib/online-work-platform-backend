@@ -102,7 +102,16 @@ const getById = (id) => __awaiter(void 0, void 0, void 0, function* () {
     });
     return result;
 });
-const updateById = (id, data) => __awaiter(void 0, void 0, void 0, function* () {
+const updateById = (id, data, req) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(data.imageUrl);
+    // upload file to cloudinary
+    const file = req.file;
+    if (file) {
+        const uploadedImage = yield FileUploadHelpers_1.FileUploadHelper.uploadToCloudinary(file);
+        if (uploadedImage) {
+            data.imageUrl = uploadedImage.secure_url;
+        }
+    }
     const result = yield prisma_1.default.task.update({
         where: {
             id,
@@ -112,7 +121,6 @@ const updateById = (id, data) => __awaiter(void 0, void 0, void 0, function* () 
     return result;
 });
 const deleteById = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log('TaskId', id);
     // Transaction and Rollback
     const result = yield prisma_1.default.$transaction((transactionClient) => __awaiter(void 0, void 0, void 0, function* () {
         yield transactionClient.orderItem.deleteMany({

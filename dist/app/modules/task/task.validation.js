@@ -21,23 +21,14 @@ const create = zod_1.z.object({
     categoryId: zod_1.z.string({
         required_error: 'Category Id is required',
     }),
-    taskReviewId: zod_1.z
-        .string({
-        required_error: 'Task Review Id is required',
-    })
-        .optional(),
 });
 const update = zod_1.z.object({
-    body: zod_1.z.object({
-        name: zod_1.z.string().optional(),
-        title: zod_1.z.string().optional(),
-        price: zod_1.z.string().optional(),
-        description: zod_1.z.string().optional(),
-        address: zod_1.z.string().optional(),
-        sellerId: zod_1.z.string().optional(),
-        categoryId: zod_1.z.string().optional(),
-        taskReviewId: zod_1.z.string().optional(),
-    }),
+    title: zod_1.z.string().optional(),
+    price: zod_1.z.string().optional(),
+    description: zod_1.z.string().optional(),
+    address: zod_1.z.string().optional(),
+    sellerId: zod_1.z.string().optional(),
+    categoryId: zod_1.z.string().optional(),
 });
 exports.TaskValidation = {
     create,

@@ -53,7 +53,7 @@ const getById = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0
 const updateById = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     const data = req.body;
-    const result = yield task_service_1.TaskService.updateById(id, data);
+    const result = yield task_service_1.TaskService.updateById(id, data, req);
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_1.default.OK,
         success: true,

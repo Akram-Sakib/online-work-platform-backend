@@ -10,7 +10,7 @@ dotenv_1.default.config({ path: path_1.default.join(process.cwd(), '.env') });
 exports.default = {
     env: process.env.NODE_ENV,
     port: process.env.PORT,
-    frontend_url: process.env.FRONTEND_URL,
+    frontend_url: process.env.FRONTEND_URL || 'http://localhost:3000',
     database_url: process.env.DATABASE_URL,
     default_student_pass: process.env.DEFAULT_STUDENT_PASS,
     default_faculty_pass: process.env.DEFAULT_FACULTY_PASS,

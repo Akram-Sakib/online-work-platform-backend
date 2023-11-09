@@ -69,12 +69,19 @@ const insertIntoDB = (user, payload) => __awaiter(void 0, void 0, void 0, functi
 });
 const getAllFromDB = (user) => __awaiter(void 0, void 0, void 0, function* () {
     const { userId, role } = user;
-    const whereConditoin = {
+    const isSellerExist = yield prisma_1.default.seller.findUnique({
         where: {
             userId,
         },
+    });
+    const whereCondition = {
+        orderItems: {
+            some: {
+                sellerId: isSellerExist === null || isSellerExist === void 0 ? void 0 : isSellerExist.id,
+            },
+        },
     };
-    const condition = role === 'admin' ? {} : whereConditoin;
+    const condition = role === 'admin' ? {} : whereCondition;
     const result = yield prisma_1.default.order.findMany({
         where: condition,
         include: {

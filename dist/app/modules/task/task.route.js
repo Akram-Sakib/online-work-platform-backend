@@ -8,7 +8,6 @@ const express_1 = __importDefault(require("express"));
 const user_1 = require("../../../enums/user");
 const FileUploadHelpers_1 = require("../../../helpers/FileUploadHelpers");
 const auth_1 = __importDefault(require("../../middlewares/auth"));
-const validateRequest_1 = __importDefault(require("../../middlewares/validateRequest"));
 const task_controller_1 = require("./task.controller");
 const task_validation_1 = require("./task.validation");
 const router = express_1.default.Router();
@@ -18,6 +17,9 @@ router.post('/create-task', (0, auth_1.default)(user_1.ENUM_USER_ROLE.SUPER_ADMI
 });
 router.get('/', task_controller_1.TaskController.getAll);
 router.get('/:id', task_controller_1.TaskController.getById);
-router.patch('/:id', (0, auth_1.default)(user_1.ENUM_USER_ROLE.SUPER_ADMIN, user_1.ENUM_USER_ROLE.ADMIN, user_1.ENUM_USER_ROLE.SELLER), (0, validateRequest_1.default)(task_validation_1.TaskValidation.update), task_controller_1.TaskController.updateById);
+router.patch('/:id', (0, auth_1.default)(user_1.ENUM_USER_ROLE.SUPER_ADMIN, user_1.ENUM_USER_ROLE.ADMIN, user_1.ENUM_USER_ROLE.SELLER), FileUploadHelpers_1.FileUploadHelper.upload.single('file'), (req, res, next) => {
+    req.body = task_validation_1.TaskValidation.update.parse(JSON.parse(req.body.data));
+    return task_controller_1.TaskController.updateById(req, res, next);
+});
 router.delete('/:id', (0, auth_1.default)(user_1.ENUM_USER_ROLE.SUPER_ADMIN, user_1.ENUM_USER_ROLE.ADMIN, user_1.ENUM_USER_ROLE.SELLER), task_controller_1.TaskController.deleteById);
 exports.taskRoutes = router;

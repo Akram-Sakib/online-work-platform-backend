@@ -24,4 +24,5 @@ router.post('/admin/register', (0, auth_1.default)(user_1.ENUM_USER_ROLE.SUPER_A
     return users_controller_1.UserController.createAdmin(req, res, next);
 });
 router.get('/', (0, auth_1.default)(user_1.ENUM_USER_ROLE.SUPER_ADMIN, user_1.ENUM_USER_ROLE.ADMIN), users_controller_1.UserController.getUsers);
+router.delete('/:id', (0, auth_1.default)(user_1.ENUM_USER_ROLE.SUPER_ADMIN, user_1.ENUM_USER_ROLE.ADMIN), users_controller_1.UserController.deleteUser);
 exports.userRoutes = router;
