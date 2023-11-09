@@ -8,8 +8,12 @@ import cookieParser from 'cookie-parser';
 import config from './config';
 
 const app: Application = express();
+
+// Define the allowed origins
+const allowedOrigins = [config.frontend_url, 'http://localhost:3000'];
+
 const corsOptions = {
-  origin: config.frontend_url,
+  origin: allowedOrigins,
   credentials: true, //access-control-allow-credentials:true
 };
 app.use(cors(corsOptions));
