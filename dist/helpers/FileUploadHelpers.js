@@ -47,7 +47,10 @@ cloudinary_1.v2.config({
 });
 const storage = multer_1.default.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'uploads/');
+        const path = `uploads/`;
+        fs.mkdirSync(path, { recursive: true });
+        // cb(null, 'uploads/');
+        cb(null, path);
     },
     filename: function (req, file, cb) {
         cb(null, file.originalname);
