@@ -5,7 +5,7 @@ import session from 'express-session';
 import httpStatus from 'http-status';
 import globalErrorHandler from './app/middlewares/globalErrorHandler';
 import routes from './app/routes';
-import config from './config';
+// import config from './config';
 
 const app: Application = express();
 app.use(
@@ -20,7 +20,7 @@ app.use(
 // const allowedOrigins = [config.frontend_url, 'http://localhost:3000'];
 
 const corsOptions = {
-  origin: "*",
+  origin: "https://online-work-platform.vercel.app",
   credentials: true, //access-control-allow-credentials:true
 };
 
