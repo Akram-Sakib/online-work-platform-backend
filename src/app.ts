@@ -6,7 +6,6 @@ import httpStatus from 'http-status';
 import globalErrorHandler from './app/middlewares/globalErrorHandler';
 import routes from './app/routes';
 import config from './config';
-import './helpers/passport-auth';
 
 const app: Application = express();
 app.use(
