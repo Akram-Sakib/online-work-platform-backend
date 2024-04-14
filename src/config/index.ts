@@ -1,17 +1,13 @@
 /* eslint-disable no-undef */
 import dotenv from 'dotenv';
 import path from 'path';
-
 dotenv.config({ path: path.join(process.cwd(), '.env') });
 
 export default {
   env: process.env.NODE_ENV,
   port: process.env.PORT,
   frontend_url: process.env.FRONTEND_URL || 'http://localhost:3000',
-  database_url: process.env.DATABASE_URL,
-  default_student_pass: process.env.DEFAULT_STUDENT_PASS,
-  default_faculty_pass: process.env.DEFAULT_FACULTY_PASS,
-  default_admin_pass: process.env.DEFAULT_ADMIN_PASS,
+  database_url: process.env.POSTGRES_URL,
   bycrypt_salt_rounds: process.env.BCRYPT_SALT_ROUNDS,
   jwt: {
     secret: process.env.JWT_SECRET,
@@ -27,5 +23,10 @@ export default {
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET,
+  },
+  google: {
+    client_id: process.env.GOOGLE_CLIENT_ID,
+    client_secret: process.env.GOOGLE_CLIENT_SECRET,
+    callback_url: process.env.GOOGLE_CALLBACK_URL,
   },
 };

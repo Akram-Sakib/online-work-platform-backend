@@ -12,3 +12,6 @@ This is a online work platform where you can find your desired work and also you
 
 ### Backend Api Documentation
 https://documenter.getpostman.com/view/26362323/2s9YXiZMrx
+
+npx prisma db push
+npx prisma generate

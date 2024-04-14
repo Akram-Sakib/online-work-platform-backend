@@ -19,7 +19,8 @@ router.post(
 
 router.get('/', TaskController.getAll);
 
-router.get('/:id', TaskController.getById);
+// router.get('/:id', TaskController.getById);
+router.get('/:slug', TaskController.getBySlug);
 
 router.patch(
   '/:id',

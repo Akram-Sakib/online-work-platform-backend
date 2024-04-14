@@ -3,6 +3,7 @@ import jwt, { JwtPayload, Secret } from 'jsonwebtoken';
 import config from '../../../config';
 import ApiError from '../../../errors/ApiError';
 import { jwtHelpers } from '../../../helpers/jwtHelpers';
+import { verifySocialTokenHelper } from '../../../helpers/verifySocialTokenHelper';
 import prisma from '../../../shared/prisma';
 import { ILoginUserResponse, IRefreshTokenResponse } from './auth.interface';
 import { isPasswordMatched } from './auth.utils';
@@ -61,6 +62,17 @@ const loginUser = async (payload: {
   };
 };
 
+const verifyGoogle = async (
+  body: Record<string, string>
+): Promise<ILoginUserResponse> => {
+  const { token } = body;
+  const verifiedToken = await verifySocialTokenHelper.verifyGoogle(token);
+  console.log('AuthService -> verifyGoogle -> verifiedToken', verifiedToken);
+  return {
+    accessToken: token,
+  };
+};
+
 const refreshToken = async (token: string): Promise<IRefreshTokenResponse> => {
   let verifiedToken = null;
   try {
@@ -103,4 +115,5 @@ const refreshToken = async (token: string): Promise<IRefreshTokenResponse> => {
 export const AuthService = {
   loginUser,
   refreshToken,
+  verifyGoogle,
 };

@@ -51,6 +51,20 @@ const getById: RequestHandler = catchAsync(
   }
 );
 
+const getBySlug: RequestHandler = catchAsync(
+  async (req: Request, res: Response) => {
+    const { slug } = req.params;
+    const result = await TaskService.getBySlug(slug);
+
+    sendResponse<Task>(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Task Fetched Successfully!',
+      data: result,
+    });
+  }
+);
+
 const updateById: RequestHandler = catchAsync(
   async (req: Request, res: Response) => {
     const { id } = req.params;
@@ -86,4 +100,5 @@ export const TaskController = {
   getById,
   updateById,
   deleteById,
+  getBySlug,
 };

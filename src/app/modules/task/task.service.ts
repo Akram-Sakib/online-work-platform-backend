@@ -20,6 +20,12 @@ const create = async (data: Task, req: Request): Promise<Task> => {
     data.imageUrl = uploadedImage.secure_url;
   }
 
+  if (!data.slug) {
+    // split title by space and join with hyphen
+    const slug = data.title.split(" ").join("-").toLowerCase();
+    data.slug = slug;
+  }
+
   const newData = await prisma.task.create({
     data,
   });
@@ -103,6 +109,19 @@ const getById = async (id: string): Promise<Task | null> => {
   return result;
 };
 
+const getBySlug = async (slug: string): Promise<Task | null> => {
+  const result = await prisma.task.findFirst({
+    where: {
+      slug,
+    },
+    include: {
+      taskReviews: { include: { buyer: true } },
+    },
+  });
+
+  return result;
+};
+
 const updateById = async (
   id: string,
   data: Partial<Task>,
@@ -166,4 +185,5 @@ export const TaskService = {
   updateById,
   getById,
   deleteById,
+  getBySlug,
 };

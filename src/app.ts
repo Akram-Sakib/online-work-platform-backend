@@ -1,13 +1,21 @@
+import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express, { Application, NextFunction, Request, Response } from 'express';
+import session from 'express-session';
 import httpStatus from 'http-status';
 import globalErrorHandler from './app/middlewares/globalErrorHandler';
 import routes from './app/routes';
-
-import cookieParser from 'cookie-parser';
 import config from './config';
+import './helpers/passport-auth';
 
 const app: Application = express();
+app.use(
+  session({
+    resave: false,
+    saveUninitialized: true,
+    secret: 'SECRET',
+  })
+);
 
 // Define the allowed origins
 const allowedOrigins = [config.frontend_url, 'http://localhost:3000'];
@@ -16,6 +24,7 @@ const corsOptions = {
   origin: allowedOrigins,
   credentials: true, //access-control-allow-credentials:true
 };
+
 app.use(cors(corsOptions));
 app.use(cookieParser());
 

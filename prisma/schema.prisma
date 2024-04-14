@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("DAT")
 }
 
 model User {
@@ -118,10 +118,11 @@ model TaskReview {
 
 model Task {
   id          String       @id @default(uuid())
-  title       String
+  title       String       @unique
   imageUrl    String
   sellerId    String
   price       String
+  slug        String       @unique
   description String
   categoryId  String
   category    Category     @relation(fields: [categoryId], references: [id])

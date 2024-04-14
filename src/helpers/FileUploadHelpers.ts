@@ -10,6 +10,8 @@ cloudinary.config({
   api_secret: config.cloudinary.api_secret,
 });
 
+// for vercel have to replace the path with the following
+// const path = `tmp/`;
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     const path = `uploads/`;
