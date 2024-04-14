@@ -10,7 +10,6 @@ const express_session_1 = __importDefault(require("express-session"));
 const http_status_1 = __importDefault(require("http-status"));
 const globalErrorHandler_1 = __importDefault(require("./app/middlewares/globalErrorHandler"));
 const routes_1 = __importDefault(require("./app/routes"));
-const config_1 = __importDefault(require("./config"));
 const app = (0, express_1.default)();
 app.use((0, express_session_1.default)({
     resave: false,
@@ -18,10 +17,10 @@ app.use((0, express_session_1.default)({
     secret: 'SECRET',
 }));
 // Define the allowed origins
-const allowedOrigins = [config_1.default.frontend_url, 'http://localhost:3000'];
+// const allowedOrigins = [config.frontend_url, 'http://localhost:3000'];
 const corsOptions = {
-    origin: allowedOrigins,
-    credentials: true, //access-control-allow-credentials:true
+// origin: allowedOrigins,
+// credentials: true, //access-control-allow-credentials:true
 };
 app.use((0, cors_1.default)(corsOptions));
 app.use((0, cookie_parser_1.default)());
