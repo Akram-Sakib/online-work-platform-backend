@@ -20,8 +20,8 @@ app.use(
 // const allowedOrigins = [config.frontend_url, 'http://localhost:3000'];
 
 const corsOptions = {
-  // origin: allowedOrigins,
-  // credentials: true, //access-control-allow-credentials:true
+  origin: "*",
+  credentials: true, //access-control-allow-credentials:true
 };
 
 app.use(cors(corsOptions));
